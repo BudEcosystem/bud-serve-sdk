@@ -10,15 +10,16 @@ class BudServeEngine(GrammarlessEngine):
     def __init__(
             self, 
             tokenizer, 
+            api_key,
             max_streaming_tokens, 
             timeout, 
             compute_log_probs,
             model,
-            **kwargs
+            base_url
         ):
 
         self.model_name = model
-        self.client = client_class(**kwargs)
+        self.client = client_class(base_url=base_url, api_key=api_key, default_headers={'api-key': api_key})
 
         super().__init__(
             tokenizer, 
@@ -77,7 +78,7 @@ class BudServe(Grammarless):
         max_streaming_tokens=1000,
         timeout=0.5,
         compute_log_probs=False,
-        **kwargs):
+        base_url=None):
 
         super().__init__(
             engine=BudServeEngine(
@@ -87,7 +88,6 @@ class BudServe(Grammarless):
                 timeout=timeout,
                 compute_log_probs=compute_log_probs,
                 model=model,
-                **kwargs
+                base_url=base_url
             ), 
-            echo=echo, 
-            **kwargs)
+            echo=echo)

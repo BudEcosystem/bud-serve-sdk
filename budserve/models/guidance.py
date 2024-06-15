@@ -18,7 +18,7 @@ class BudServeClient(BudServe):
         timeout=0.5,
         compute_log_probs=False,
         engine_class=None,
-        **kwargs,
+        base_url=None,
     ):
         """
         Build a new BudServe model object that represents a model in a given state.
@@ -31,7 +31,7 @@ class BudServeClient(BudServe):
         )
 
         # Default base_url is the together.ai endpoint
-        if not "base_url" in kwargs:
+        if base_url is None:
             raise Exception(
                 "The base_url is required to connect to the correct server. (eg: http://x.x.x.x:8000/v1)"
             )
@@ -64,7 +64,7 @@ class BudServeClient(BudServe):
             max_streaming_tokens,
             timeout,
             compute_log_probs,
-            **kwargs,
+            base_url,
         )
 
 class BudServeCompletion(BudServeClient):
