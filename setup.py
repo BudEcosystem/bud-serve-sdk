@@ -19,7 +19,7 @@ def get_requirements() -> List[str]:
 setup(
     name='budserve',
     version='0.0.1',
-    description='A python sdk for budserve inference engine',
+    description='A client package to directly integrate Bud Serve engine to your python application.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/BudEcosystem/bud-serve-sdk',
@@ -27,7 +27,7 @@ setup(
     install_requires=get_requirements(),
     classifiers=[
         'Programming Language :: Python :: 3',
-        'License :: OSI Approved :: Apache2 License',
+        'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
     ],
     python_requires='>=3.10',
