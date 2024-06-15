@@ -1,12 +1,14 @@
-# Bud Server Python SDK
+# Bud Serve Python SDK
 
-## Installation
+A client package to directly integrate Bud Serve engine to your python application. The package support different prompting libraries like Guidance, langchain etc.
+
+### Installation
 
 ```
 pip install git+https://github.com/BudEcosystem/bud-serve-sdk.git
 ```
 
-## Supported integration:
+### Supported integrations:
 
 - [X] Guidance
 - [ ] LangChain
@@ -14,13 +16,20 @@ pip install git+https://github.com/BudEcosystem/bud-serve-sdk.git
 - [ ] Haystack
 - [ ] LMQL
 
-## Guidance example
+### Guidance example
+
+Add the API key to the enviornament
+
+```
+export BUDSERVE_API_KEY=XXXXXXXX
+```
+Sample code to connect to bud serve remote server using guidance
 
 ```
 from guidance import gen, user, system, assistant
 from budserve.models.guidance import BudServeClient
 
-llama2 = BudServeClient("microsoft/Phi-3-medium-4k-instruct", echo=False, base_url="http://localhost9000/v1")
+llama2 = BudServeClient("meta-llama/Llama-2-7b-chat-hf", echo=False, base_url="http://localhost9000/v1")
 
 with user():
     llama2 += f'what is your name? '
