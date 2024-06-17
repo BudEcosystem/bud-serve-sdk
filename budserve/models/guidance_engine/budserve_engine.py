@@ -94,7 +94,7 @@ class BudServeEngine(GrammarlessEngine):
         # TODO: Move this somewhere more general for all chat models?
         if messages == []:
             raise ValueError(
-                f"The OpenAI model {self.model_name} is a Chat-based model and requires role tags in the prompt! \
+                f"The model {self.model_name} is a Chat-based model and requires role tags in the prompt! \
             Make sure you are using guidance context managers like `with system():`, `with user():` and `with assistant():` \
             to appropriately format your guidance program for this type of model."
             )
@@ -135,11 +135,20 @@ class BudServeEngine(GrammarlessEngine):
         
     def _generator(self, prompt: bytes, temperature: float):
         assert isinstance(prompt, bytes)
-        # if self.model_name in self._completion_models:
-        # return self._generator_completion(prompt, temperature)
-        # else:
+        is_chat_model = False
+        for role_name, start_bytes in (
+                ("system", b"<|im_start|>system\n"),
+                ("user", b"<|im_start|>user\n"),
+                ("assistant", b"<|im_start|>assistant\n"),
+            ):
+                if prompt.startswith(start_bytes):
+                    is_chat_model = True
+        
+        if not is_chat_model:
+            return self._generator_completion(prompt, temperature)
+        else:
             # Otherwise we are in a chat context
-        return self._generator_chat(prompt, temperature)
+            return self._generator_chat(prompt, temperature)
             # print("Not implemented")
 
 
