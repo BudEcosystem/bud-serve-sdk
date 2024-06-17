@@ -1,2 +1,4 @@
 guidance==0.1.15
 transformers
+openai
+
