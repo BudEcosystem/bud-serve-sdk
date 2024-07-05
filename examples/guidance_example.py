@@ -1,7 +1,7 @@
 from guidance import gen, user, system, assistant
 from budserve.models.guidance import BudServeClient
 
-llama2 = BudServeClient("microsoft/Phi-3-medium-4k-instruct", echo=False, base_url="http://x.x.x.x:9000/v1")
+llama2 = BudServeClient("meta-llama/Llama-2-7b-chat-hf", echo=False, base_url="http://x.x.x.x:xxx/v1")
 
 with user():
     llama2 += f'what is your name? '

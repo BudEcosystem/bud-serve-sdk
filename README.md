@@ -8,7 +8,49 @@ A client package to directly integrate Bud Serve engine to your python applicati
 pip install git+https://github.com/BudEcosystem/bud-serve-sdk.git
 ```
 
-### Supported integrations:
+### Usage
+
+The inference engine can be accessed via OpenAI api format and the options available in the OpenAI chat and completion can be used from our client.
+
+```
+from budserve import BudServe
+
+client = BudServe(base_url="http://x.x.x.x:xxx/v1")
+
+completion = client.chat.completions.create(
+    model="meta-llama/Llama-2-7b-chat-hf",
+    messages=[{"role": "user", "content": "write an essay about history of cricket"}],
+    max_tokens=200
+)
+
+print(completion.choices[0].message.content)
+```
+You will need add the api key, BUDSERVE_API_KEY=XXXXXXXX in your env to authenticate.
+
+
+### Streaming responses:
+
+The streaming response support is provided using Server Side Events.
+
+```
+from budserve import BudServe
+
+client = BudServe(base_url="http://x.x.x.x:xxx/v1")
+
+stream = client.chat.completions.create(
+    model="meta-llama/Llama-2-7b-chat-hf",
+    messages=[{"role": "user", "content": "write an essay about history of cricket"}],
+    stream=True,
+    max_tokens=200
+)
+
+for chunk in stream:
+    print(chunk.choices[0].delta.content or "", end="", flush=True)
+```
+
+
+
+## Supported integrations:
 
 - [X] Guidance
 - [ ] LangChain

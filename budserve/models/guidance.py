@@ -4,10 +4,10 @@ from guidance.models.transformers._transformers import TransformersTokenizer
 
 from transformers import AutoTokenizer
 
-from .guidance_engine.budserve_engine import BudServe, BudServeEngine
+from .guidance_engine.budserve_engine import BudServeGrammerless, BudServeEngine
 
 
-class BudServeClient(BudServe):
+class BudServeClient(BudServeGrammerless):
     def __init__(
         self,
         model,
@@ -49,7 +49,7 @@ class BudServeClient(BudServe):
                 BudServeCompletion: BudServeEngine,
                 BudServeInstruct: BudServeEngine,
                 BudServeChat: BudServeEngine,
-                BudServe: BudServeEngine,
+                BudServeGrammerless: BudServeEngine,
             }
             for k in engine_map:
                 if issubclass(self.__class__, k):
