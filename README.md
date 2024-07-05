@@ -4,7 +4,7 @@ A client package to directly integrate Bud Serve engine to your python applicati
 
 ### Installation
 
-```
+```bash
 pip install git+https://github.com/BudEcosystem/bud-serve-sdk.git
 ```
 
@@ -12,7 +12,7 @@ pip install git+https://github.com/BudEcosystem/bud-serve-sdk.git
 
 The inference engine can be accessed via OpenAI api format and the options available in the OpenAI chat and completion can be used from our client.
 
-```
+```python
 from budserve import BudServe
 
 client = BudServe(base_url="http://x.x.x.x:xxx/v1")
@@ -25,14 +25,14 @@ completion = client.chat.completions.create(
 
 print(completion.choices[0].message.content)
 ```
-You will need add the api key, BUDSERVE_API_KEY=XXXXXXXX in your env to authenticate.
+You will need add the api key, `BUDSERVE_API_KEY=XXXXXXXX` in your env to authenticate.
 
 
 ### Streaming responses:
 
 The streaming response support is provided using Server Side Events.
 
-```
+```python
 from budserve import BudServe
 
 client = BudServe(base_url="http://x.x.x.x:xxx/v1")
@@ -62,12 +62,12 @@ for chunk in stream:
 
 Add the API key to the enviornament
 
-```
+```bash
 export BUDSERVE_API_KEY=XXXXXXXX
 ```
 Sample code to connect to bud serve remote server using guidance
 
-```
+```python
 from guidance import gen, user, system, assistant
 from budserve.models.guidance import BudServeClient
 
