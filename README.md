@@ -91,15 +91,6 @@ We have extended the package with some off the shelf fuctions for specific task.
 
 ### Summarization
 
-Here are the option available to for summarization task
-
-***client*:** BudServe client which connect with the server for inference
-
-***num_sen:*** Required number of sentences for the summary. Default value: 4
-
-***num_words:*** Total number of required words in the summary. Default value: 80
-
-***topic:*** The type of content which provided for summarisation. This helps to align the model generation to specific domain. eg: Article, paper, documentation, call transcription etc
 
 ```python
 from budserve import BudServe
@@ -114,3 +105,13 @@ summerizer = Summerization(client=client, num_sen=3, num_words=40)
 summary = summerizer.summarize_text(text=article, topic="Support call transcription")
 print(summary)
 ```
+
+Here are the option available to for summarization task
+
+***client*:** BudServe client which connect with the server for inference
+
+***num_sen:*** Required number of sentences for the summary. Default value: 4
+
+***num_words:*** Total number of required words in the summary. Default value: 80
+
+***topic:*** The type of content which provided for summarisation. This helps to align the model generation to specific domain. eg: Article, paper, documentation, call transcription etc
