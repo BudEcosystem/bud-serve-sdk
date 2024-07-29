@@ -53,7 +53,7 @@ for chunk in stream:
 ## Supported integrations:
 
 - [X] Guidance
-- [ ] LangChain
+- [X] LangChain
 - [ ] LlamaIndex
 - [ ] Haystack
 - [ ] LMQL
@@ -84,6 +84,28 @@ print(llama2["answer"])
 
 ```
 
+### Langchain example
+
+Sample code to connect to bud serve remote server using guidance
+
+```python
+
+from budserve.models.langchain_bud import BUD
+from langchain_core.prompts import PromptTemplate
+from langchain.schema.output_parser import StrOutputParser
+
+
+llm = BUD(bud_base_url="http://localhost9000/v1",
+                 model_name="meta-llama/Meta-Llama-3-8B-Instruct",
+                 api_key="xxxxxxxxx")
+
+prompt_template = PromptTemplate.from_template("Tell me a joke about {topic}")
+
+chain = prompt_template | llm | StrOutputParser()
+
+print(chain.invoke("cat"))
+
+```
 
 ## Tasks
 

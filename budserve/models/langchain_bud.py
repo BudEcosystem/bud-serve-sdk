@@ -13,7 +13,7 @@ class BUD(LLM):
     
     def __init__(self, bud_base_url,model_name,api_key,max_tokens=512):
         super().__init__() 
-        self.base_url = f"{bud_base_url}/v1/chat/completions"
+        self.base_url = f"{bud_base_url}/chat/completions"
         self.model_name = model_name
         self.api_key = api_key
         self.max_tokens = max_tokens
