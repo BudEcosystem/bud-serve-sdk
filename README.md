@@ -90,12 +90,12 @@ Sample code to connect to bud serve remote server using guidance
 
 ```python
 
-from budserve.models.langchain_bud import BUD
+from budserve.models.langchain import BudServeClient
 from langchain_core.prompts import PromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 
 
-llm = BUD(bud_base_url="http://localhost9000/v1",
+llm = BudServeClient(base_url="http://localhost9000/v1",
                  model_name="meta-llama/Meta-Llama-3-8B-Instruct",
                  api_key="xxxxxxxxx")
 

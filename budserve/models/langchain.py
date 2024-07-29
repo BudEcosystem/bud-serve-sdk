@@ -1,22 +1,37 @@
+import os
 from typing import Any, Dict, Iterator, List, Optional
 import requests
 from langchain_core.callbacks.manager import CallbackManagerForLLMRun
 from langchain_core.language_models.llms import LLM
 from langchain_core.outputs import GenerationChunk
 
-class BUD(LLM):
+class BudServeClient(LLM):
     
     base_url = ""
     model_name = ""
     api_key = ""
     max_tokens = 0
     
-    def __init__(self, bud_base_url,model_name,api_key,max_tokens=512):
+    def __init__(self, base_url, model_name, api_key, max_tokens=512):
         super().__init__() 
-        self.base_url = f"{bud_base_url}/chat/completions"
+        self.base_url = f"{base_url}/chat/completions"
         self.model_name = model_name
         self.api_key = api_key
         self.max_tokens = max_tokens
+
+        # Default base_url is the together.ai endpoint
+        if base_url is None:
+            raise Exception(
+                "The base_url is required to connect to the correct server. (eg: http://x.x.x.x:8000/v1)"
+            )
+        # BudServe uses BUDSERVE_API_KEY env value instead of OPENAI_API_KEY
+        # We pass explicitly to avoid OpenAI class complaining about a missing key
+        if api_key is None:
+            api_key = os.environ.get("BUDSERVE_API_KEY", None)
+        if api_key is None:
+            raise Exception(
+                "The api_key client option must be set either by passing api_key to the client or by setting the BUDSERVE_API_KEY environment variable"
+            )
 
     def _call(
         self,
