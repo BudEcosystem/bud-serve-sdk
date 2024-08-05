@@ -24,7 +24,7 @@ class BudServeClient(BudServeGrammerless):
         Build a new BudServe model object that represents a model in a given state.
         """
         if tokenizer is not None:
-            tokenizer = AutoTokenizer.from_pretrained(model)
+            tokenizer = AutoTokenizer.from_pretrained(tokenizer)
 
         tokenizer = TransformersTokenizer(
             model=model, tokenizer=tokenizer, ignore_bos_token=True
