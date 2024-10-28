@@ -2,15 +2,16 @@ import os
 from typing import Any, Dict, Iterator, List, Optional
 import requests
 from langchain_core.callbacks.manager import CallbackManagerForLLMRun
-from langchain_core.language_models.llms import LLM
+from langchain_core.language_models import LLM
 from langchain_core.outputs import GenerationChunk
+from pydantic import Field
+
 
 class BudServeClient(LLM):
-    
-    base_url = ""
-    model_name = ""
-    api_key = ""
-    max_tokens = 0
+    base_url: str = Field(default="")
+    model_name: str = Field(default="")
+    api_key: str = Field(default="")
+    max_tokens: int = Field(default=0)
     
     def __init__(self, base_url, model_name, api_key, max_tokens=512):
         super().__init__() 
@@ -81,7 +82,7 @@ class BudServeClient(LLM):
     @property
     def _llm_type(self) -> str:
         """Get the type of language model used by this chat model. Used for logging purposes only."""
-        return "custom"
+        return "budserve"
 
     def fetch_completion_from_api(self, prompt: str) -> str:
         headers = {'Content-Type': 'application/json', 'api-key':self.api_key}
