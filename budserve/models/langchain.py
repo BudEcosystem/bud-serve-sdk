@@ -60,7 +60,7 @@ class BudServeClient(LLM):
             "max_tokens": self.max_tokens,
             "messages": [{"role": "user", "content": prompt}],
             "stream": True,
-            "engine": "budserve"
+            # "engine": "budserve"
         }
         response_iter = requests.post(self.base_url, json=payload, headers=headers, stream=True)
         for chunk in response_iter.iter_lines(decode_unicode=False, delimiter=b"\n\n"):
@@ -89,7 +89,7 @@ class BudServeClient(LLM):
             "model": self.model_name,
             "max_tokens": self.max_tokens,
             "messages": [{"role": "user", "content": prompt}],
-            "engine": "budserve"
+            # "engine": "budserve"
         }
         try:
             response = requests.post(self.base_url, json=payload, headers=headers)
